@@ -30,7 +30,7 @@ jobs:
 
     - name: Installing dependencies
       run: |
-        apt-get update && apt-get install --assume-yes --no-install-recommends autoconf automake bc bison build-essential ca-certificates cpio curl device-tree-compiler flex g++ gcc gcc-aarch64-linux-gnu gettext git-core gnupg gperf groff lib32ncurses5-dev lib32stdc++6 lib32z-dev libc6-dev libc6-dev-i386 libffi-dev libgl1-mesa-dev libncursesw5-dev libpopt-dev libssl-dev libtool libx11-dev libxml2-utils make ninja-build openjdk-8-jdk-headless openjdk-8-jre-headless openssh-client p7zip-full pkg-config python python3 python3-pip python3-venv rsync sudo unzip uuid-dev wget x11proto-core-dev xsltproc xz-utils zip zlib1g-dev
+        sudo apt-get update && apt-get install --assume-yes --no-install-recommends autoconf automake bc bison build-essential ca-certificates cpio curl device-tree-compiler flex g++ gcc gcc-aarch64-linux-gnu gettext git-core gnupg gperf groff lib32ncurses5-dev lib32stdc++6 lib32z-dev libc6-dev libc6-dev-i386 libffi-dev libgl1-mesa-dev libncursesw5-dev libpopt-dev libssl-dev libtool libx11-dev libxml2-utils make ninja-build openjdk-8-jdk-headless openjdk-8-jre-headless openssh-client p7zip-full pkg-config python python3 python3-pip python3-venv rsync sudo unzip uuid-dev wget x11proto-core-dev xsltproc xz-utils zip zlib1g-dev
 
     - name: Building Kernel
       run: |
