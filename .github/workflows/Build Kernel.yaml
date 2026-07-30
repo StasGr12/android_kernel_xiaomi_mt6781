@@ -24,17 +24,22 @@ jobs:
       with:
         swap-size-gb: 24
 
-    - name: Cloneing Kernel Source
-      run: |
-        git clone ${{ github.server_url }}/${{ github.repository }}.git -b ${{ inputs.KERNEL_SOURCE_BRANCH }} kernel/
-
     - name: Installing dependencies
       run: |
         sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends autoconf automake bc bison build-essential ca-certificates cpio curl device-tree-compiler flex g++ gcc gcc-aarch64-linux-gnu gettext git-core gnupg gperf groff lib32ncurses5-dev lib32stdc++6 lib32z-dev libc6-dev libc6-dev-i386 libffi-dev libgl1-mesa-dev libncursesw5-dev libpopt-dev libssl-dev libtool libx11-dev libxml2-utils make ninja-build openjdk-8-jdk-headless openjdk-8-jre-headless openssh-client p7zip-full pkg-config python-is-python3 python3 python3-pip python3-venv rsync sudo unzip uuid-dev wget x11proto-core-dev xsltproc xz-utils zip zlib1g-dev clang lld llvm
 
-    - name: Building Kernel
+    - name: Cloneing Kernel Source
+      run: |
+        git clone ${{ github.server_url }}/${{ github.repository }}.git -b ${{ inputs.KERNEL_SOURCE_BRANCH }} kernel/
+
+
+    - name: Patch broken inline functions
       run: |
         cd kernel
+        sed -i 's/inline void ksm_flock/void ksm_flock/g' kernel/include/linux/keyslot-manager.h
+
+    - name: Building Kernel
+      run: |
         export ARCH=arm64
         export SUBARCH=arm64
         export CC=clang
