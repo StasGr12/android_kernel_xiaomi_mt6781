@@ -1,4 +1,4 @@
-w/*
+/*
  * Based on arch/arm/mm/fault.c
  *
  * Copyright (C) 1995  Linus Torvalds
@@ -19,7 +19,6 @@ w/*
  */
 
 #include <linux/extable.h>
-#include <linux/kfence.h>
 #include <linux/signal.h>
 #include <linux/mm.h>
 #include <linux/hardirq.h>
@@ -305,9 +304,6 @@ static void __do_kernel_fault(unsigned long addr, unsigned int esr,
 	} else if (addr < PAGE_SIZE) {
 		msg = "NULL pointer dereference";
 	} else {
-		if (kfence_handle_page_fault(addr, esr & ESR_ELx_WNR, regs))
-			return;
-
 		msg = "paging request";
 	}
 
